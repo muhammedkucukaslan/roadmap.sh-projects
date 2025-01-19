@@ -33,9 +33,6 @@ I have added a new `deleteDone()` function to delete all the tasks that are done
 // All the tasks that are done are deleted.
 ```
 
-
-
-
 ## Usage
 
 To run the program, use the following command:
@@ -55,7 +52,6 @@ Operations:
 
 ```
 
-I have implemented the following operations:
 ![CLI Example](public/image.png)
 
 
