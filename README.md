@@ -13,5 +13,6 @@ Solution for each project is in the respective folder. The folder name is the sa
 1. [Task Tracker](https://roadmap.sh/projects/task-tracker)
 2. [GitHub User Activity](https://roadmap.sh/projects/github-user-activity)
 3. [Expense Tracker](https://roadmap.sh/projects/expense-tracker)
+4. [Number Guessing Game](https://roadmap.sh/projects/number-guessing-game)
 
 You can find the list of beginner projects [here](https://roadmap.sh/backend/projects?difficulty=beginner).
