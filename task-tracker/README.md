@@ -6,7 +6,7 @@ Sample solution for the [task tracker](https://roadmap.sh/projects/task-tracker)
 
 1. Clone the repository:
 ```bash
- git clone https://github.com/muhammedkucukaslan/roamdap.sh-projects
+ git clone https://github.com/muhammedkucukaslan/roadmap.sh-projects.git
 ```
 2. Navigate to the project directory:
 ```bash
