@@ -3,14 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"os"
 	"time"
 )
 
 var (
-	today    = time.Now().Format("2006-01-02")
-	jsonPath = "data.json"
+	today = time.Now().Format("2006-01-02")
 )
 
 type Task struct {
@@ -23,9 +21,9 @@ type Task struct {
 
 type List []*Task
 
-func (l *List) readJsonFile() error {
+func (l *List) readJsonFile(jsonSource string) error {
 
-	file, err := os.OpenFile(jsonPath, os.O_CREATE|os.O_RDONLY, 0644)
+	file, err := os.OpenFile(jsonSource, os.O_CREATE|os.O_RDONLY, 0644)
 	if err != nil {
 		return fmt.Errorf("%v", err)
 	}
@@ -37,30 +35,22 @@ func (l *List) readJsonFile() error {
 		return nil
 	}
 
-	var todoBytes []byte
-
-	todoBytes, err = io.ReadAll(file)
-	if err != nil {
-		return fmt.Errorf("%v", err)
-	}
-
-	if err = json.Unmarshal(todoBytes, l); err != nil {
-		return fmt.Errorf("Unmarshalling error: %s", err)
+	if err := json.NewDecoder(file).Decode(l); err != nil {
+		return fmt.Errorf("Reading file error:%w", err)
 	}
 	return nil
 }
 
-func (l *List) writeJsonFile() {
-	jsonByte, err := json.MarshalIndent(l, "", " ")
+func (l *List) writeJsonFile(jsonSource string) error {
+	file, err := os.OpenFile(jsonSource, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	if err != nil {
-		fmt.Println("Error parsing data to json:", err)
-		return
+		return fmt.Errorf("Opening file error:%w", err)
 	}
-
-	if err := os.WriteFile(jsonPath, jsonByte, 0644); err != nil {
-		fmt.Println("Error writing file:")
-		return
+	defer file.Close()
+	if err = json.NewEncoder(file).Encode(&l); err != nil {
+		return fmt.Errorf("Writing file error:%w", err)
 	}
+	return nil
 }
 
 func (l *List) add(description string) {

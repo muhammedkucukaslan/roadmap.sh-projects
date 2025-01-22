@@ -6,13 +6,17 @@ import (
 	"strconv"
 )
 
+var (
+	jsonPath = "data.json"
+)
+
 func main() {
 	args := os.Args
 	if err := checkArgs(args); err == 1 {
 		return
 	}
 	list := List{}
-	if err := list.readJsonFile(); err != nil {
+	if err := list.readJsonFile(jsonPath); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -66,5 +70,8 @@ func main() {
 		}
 	}
 
-	list.writeJsonFile()
+	if err := list.writeJsonFile(jsonPath); err != nil {
+		fmt.Println(err)
+		return
+	}
 }
