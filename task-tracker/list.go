@@ -21,7 +21,7 @@ type Task struct {
 	UpdatedAt   string `json:"updated_at"`
 }
 
-type List []Task
+type List []*Task
 
 func (l *List) readJsonFile() error {
 
@@ -33,7 +33,7 @@ func (l *List) readJsonFile() error {
 	if info, err := file.Stat(); err != nil {
 		return fmt.Errorf("%v", err)
 	} else if info.Size() == 0 {
-		*l = make([]Task, 0)
+		*l = make([]*Task, 0)
 		return nil
 	}
 
@@ -77,47 +77,51 @@ func (l *List) add(description string) {
 		CreatedAt:   today,
 		UpdatedAt:   today,
 	}
-	*l = append(*l, task)
+	*l = append(*l, &task)
 }
 
-func (l *List) list() []Task {
-	return *l
+func (l List) list() []Task {
+	var tasks []Task
+	for _, task := range l {
+		tasks = append(tasks, *task)
+	}
+	return tasks
 }
 
-func (l *List) listDone() []Task {
+func (l List) listDone() []Task {
 	var tmp []Task
-	for _, task := range *l {
+	for _, task := range l {
 		if task.Status == "done" {
-			tmp = append(tmp, task)
+			tmp = append(tmp, *task)
 		}
 	}
 	return tmp
 }
 
-func (l *List) listTodo() []Task {
+func (l List) listTodo() []Task {
 	var tmp []Task
-	for _, task := range *l {
+	for _, task := range l {
 		if task.Status == "todo" {
-			tmp = append(tmp, task)
+			tmp = append(tmp, *task)
 		}
 	}
 	return tmp
 }
-func (l *List) listInProgress() []Task {
+func (l List) listInProgress() []Task {
 	var tmp []Task
-	for _, task := range *l {
+	for _, task := range l {
 		if task.Status == "in-progress" {
-			tmp = append(tmp, task)
+			tmp = append(tmp, *task)
 		}
 	}
 	return tmp
 }
 
-func (l *List) update(id int, description string) error {
-	for i, task := range *l {
+func (l List) update(id int, description string) error {
+	for i, task := range l {
 		if task.Id == id {
-			(*l)[i].Description = description
-			(*l)[i].UpdatedAt = today
+			(*l[i]).Description = description
+			(*l[i]).UpdatedAt = today
 			return nil
 		}
 	}
@@ -140,7 +144,7 @@ func (l *List) delete(id int) error {
 }
 
 func (l *List) deleteDone() error {
-	newSlice := make([]Task, 0, len(*l))
+	newSlice := make([]*Task, 0, len(*l))
 	for i, task := range *l {
 		if task.Status != "done" {
 			newSlice = append(newSlice, (*l)[i])
