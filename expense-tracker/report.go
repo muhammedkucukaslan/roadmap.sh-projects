@@ -47,14 +47,8 @@ func (r *Report) readFromCSV(sourcePath string) error {
 	}
 
 	if info.Size() == 0 {
-		_, err := file.WriteString("id,date,description,amount\n")
-		if err != nil {
-			return fmt.Errorf("writing header error: %w", err)
-		}
-		_, err = file.Seek(0, 0)
-		if err != nil {
-			return fmt.Errorf("seeking to start error: %w", err)
-		}
+		*r = Report{}
+		return nil
 	}
 	if err := gocsv.UnmarshalFile(file, r); err != nil {
 		return fmt.Errorf("unmarshaling file error: %w", err)
