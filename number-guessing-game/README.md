@@ -10,7 +10,7 @@ Sample solution for the [number-guessing-game](https://roadmap.sh/projects/numbe
 ```
 2. Navigate to the project directory:
 ```bash
- cd number-guessing-game
+ cd roadmap.sh-projects/number-guessing-game
 ```
 3. Run the project: 
 ```bash

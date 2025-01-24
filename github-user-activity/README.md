@@ -10,7 +10,8 @@ Sample solution for the [github-user-activity](https://roadmap.sh/projects/githu
 ```
 2. Navigate to the project directory:
 ```bash
- cd github-user-activity
+ cd roadmap.sh-projects/github-user-activity
+```
 ```
 3. Build the project:
 ```bash

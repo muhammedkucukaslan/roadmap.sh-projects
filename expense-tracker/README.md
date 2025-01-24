@@ -10,7 +10,7 @@ Sample solution for the [expense-tracker](https://roadmap.sh/projects/expense-tr
 ```
 2. Navigate to the project directory:
 ```bash
- cd expense-tracker
+ cd roadmap.sh-projects/expense-tracker
 ```
 3. Run the project: 
 ```bash

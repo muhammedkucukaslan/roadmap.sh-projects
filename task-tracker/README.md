@@ -10,7 +10,7 @@ Sample solution for the [task tracker](https://roadmap.sh/projects/task-tracker)
 ```
 2. Navigate to the project directory:
 ```bash
- cd task-tracker
+ cd roadmap.sh-projects/task-tracker
 ```
 3. Build the project:
 ```bash
