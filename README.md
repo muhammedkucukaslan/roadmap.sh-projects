@@ -15,5 +15,6 @@ Solution for each project is in the respective folder. The folder name is the sa
 3. [Expense Tracker](https://roadmap.sh/projects/expense-tracker)
 4. [Number Guessing Game](https://roadmap.sh/projects/number-guessing-game)
 5. [Weather API](https://roadmap.sh/projects/weather-api-wrapper-service)
+6. [TMBD Cli Tool](https://roadmap.sh/projects/tmdb-cli)
 
 You can find the list of beginner projects [here](https://roadmap.sh/backend/projects?difficulty=beginner).
