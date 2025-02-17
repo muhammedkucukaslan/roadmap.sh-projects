@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -43,6 +44,7 @@ var (
 type Client struct {
 	Ctx         context.Context
 	redisClient *redis.Client
+	Mutex       sync.RWMutex
 }
 
 func NewClient(ctx context.Context, redisClient *redis.Client) *Client {
@@ -56,12 +58,14 @@ func (c *Client) weatherAPIHandler(w http.ResponseWriter, r *http.Request) {
 	parts := strings.Split(r.URL.Path, "/")
 	city := parts[len(parts)-1]
 
+	c.Mutex.RLock()
 	if weatherData, err := c.cacheFromRedisDB(city); err == nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(weatherData)
 		return
 	}
+	c.Mutex.RUnlock()
 
 	weatherData, errStruct := c.fetchFromAPI(city)
 	if errStruct != (ErrorStruct{}) {
@@ -74,10 +78,13 @@ func (c *Client) weatherAPIHandler(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(errStruct)
 		return
 	}
-
-	if err := c.setToRedisDB(city, weatherData); err != nil {
-		logError(err.Error())
-	}
+	go func() {
+		c.Mutex.Lock()
+		if err := c.setToRedisDB(city, weatherData); err != nil {
+			logError(err.Error())
+		}
+		c.Mutex.RLock()
+	}()
 	json.NewEncoder(w).Encode(weatherData)
 
 }
