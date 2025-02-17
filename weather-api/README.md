@@ -17,7 +17,6 @@ This project is a simple weather API built using Go, designed to retrieve weathe
 ## Requirements
 - Go 1.16+
 - Redis
-- Docker (optional, for containerization)
 
 ## Workflow
 
