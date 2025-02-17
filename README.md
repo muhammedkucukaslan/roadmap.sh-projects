@@ -19,3 +19,10 @@ Solution for each project is in the respective folder. The folder name is the sa
 7. [Blog API](https://roadmap.sh/projects/blogging-platform-api)
 
 You can find the list of beginner projects [here](https://roadmap.sh/backend/projects?difficulty=beginner).
+
+
+### Interdimate Projects
+
+1. [Caching Proxy](https://roadmap.sh/projects/caching-server)
+
+You can find the list of intermediate projects [here](https://roadmap.sh/backend/projects?difficulty=intermediate).
