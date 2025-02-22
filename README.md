@@ -24,5 +24,6 @@ You can find the list of beginner projects [here](https://roadmap.sh/backend/pro
 ### Interdimate Projects
 
 1. [Caching Proxy](https://roadmap.sh/projects/caching-server)
+2. [URL Shortening Service](https://roadmap.sh/projects/url-shortening-service)
 
 You can find the list of intermediate projects [here](https://roadmap.sh/backend/projects?difficulty=intermediate).
